@@ -3,7 +3,8 @@
 
   // アクセストークンが取得できていない場合は認証ページにリダイレクト
   if (!window.location.hash) {
-    window.location = 'https://public-api.wordpress.com/oauth2/authorize?client_id=44085&redirect_uri=http://localhost:9000/&response_type=token';
+    var redirect = window.location.origin + window.location.pathname;
+    window.location = 'https://public-api.wordpress.com/oauth2/authorize?client_id=44085&redirect_uri=' + redirect + '&response_type=token';
     return;
   }
 
