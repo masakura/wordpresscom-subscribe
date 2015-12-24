@@ -5,7 +5,7 @@ WordPress.com の記事の最新 20 件を購読するアプリ。
 ## 操作方法
 事前に WordPress.com アカウントを取得してください。
 
-1. [WordPress.com Subscriber](masakura.github.io/wordpresscom-subscribe/) にアクセス
+1. [WordPress.com Subscriber](http://masakura.github.io/wordpresscom-subscribe/) にアクセス
 2. WordPress.com に移動しますので、ログイン後に `Approval` ボタンをクリック
 3. テキストボックスに `masakura.wordpress.com` などの WordPress.com のドメインを入力
 4. `Subscribe` ボタンをクリック
