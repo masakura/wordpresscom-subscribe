@@ -105,5 +105,5 @@
     }
   };
 
-  $(document).on('click', '#subscribe', siteManager.subscribe.bind(siteManager));
+  $(document).on('submit', '#subscribe', siteManager.subscribe.bind(siteManager));
 })();
