@@ -1,10 +1,17 @@
 (function () {
   'use strict';
 
+  var clientId;
+  if (window.location.hostname === 'localhost') {
+    clientId = 44553;
+  } else {
+    clientId = 44553;
+  }
+
   // アクセストークンが取得できていない場合は認証ページにリダイレクト
   if (!window.location.hash) {
     var redirect = window.location.origin + window.location.pathname;
-    window.location = 'https://public-api.wordpress.com/oauth2/authorize?client_id=44085&redirect_uri=' + redirect + '&response_type=token';
+    window.location = 'https://public-api.wordpress.com/oauth2/authorize?client_id=' + clientId + '&redirect_uri=' + redirect + '&response_type=token';
     return;
   }
 
