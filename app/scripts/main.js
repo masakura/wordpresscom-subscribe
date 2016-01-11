@@ -8,13 +8,6 @@
     clientId = 44553;
   }
 
-  // アクセストークンが取得できていない場合は認証ページにリダイレクト
-  if (!window.location.hash) {
-    var redirect = window.location.origin + window.location.pathname;
-    window.location = 'https://public-api.wordpress.com/oauth2/authorize?client_id=' + clientId + '&redirect_uri=' + redirect + '&response_type=token';
-    return;
-  }
-
   // アクセストークンを取得
   // params = {'#access_token': '...', ...}
   var params = {};
@@ -23,6 +16,13 @@
       var pair = p.split('=', 2);
       params[pair[0]] = decodeURIComponent(pair[1]);
     });
+
+  // アクセストークンが取得できていない場合は認証ページにリダイレクト
+  if (!params['#access_token']) {
+    var redirect = window.location.origin + window.location.pathname;
+    window.location = 'https://public-api.wordpress.com/oauth2/authorize?client_id=' + clientId + '&redirect_uri=' + redirect + '&response_type=token';
+    return;
+  }
 
   /**
    * サイトの投稿一覧を取得します
