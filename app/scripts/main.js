@@ -25,7 +25,7 @@
     return;
   }
 
-  window.history.pushState(null, null, window.location.origin + window.location.pathname);
+  window.history.replaceState(null, null, window.location.origin + window.location.pathname);
 
   $(document).on('submit', '#subscribe', function (e) {
     e.preventDefault();
