@@ -93,6 +93,10 @@
 
         // <ul id="#posts"> を空にして、投稿データを追加しなおします
         $('#posts').empty().append($posts);
+      })
+      .fail(function (error) {
+        // エラーの場合
+        console.log(error);
       });
   });
 })();
