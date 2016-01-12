@@ -15,7 +15,7 @@
     clientId = 44553;
   } else {
     // 本番環境用
-    clientId = 44553;
+    clientId = 44085;
   }
 
   // アクセストークンを取得
