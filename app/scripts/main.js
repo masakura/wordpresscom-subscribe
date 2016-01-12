@@ -20,9 +20,12 @@
   // アクセストークンが取得できていない場合は認証ページにリダイレクト
   if (!params['#access_token']) {
     var redirect = window.location.origin + window.location.pathname;
-    window.location = 'https://public-api.wordpress.com/oauth2/authorize?client_id=' + clientId + '&redirect_uri=' + redirect + '&response_type=token';
+    var location = 'https://public-api.wordpress.com/oauth2/authorize?client_id=' + clientId + '&redirect_uri=' + redirect + '&response_type=token';
+    window.location = location;
     return;
   }
+
+  window.history.pushState(null, null, window.location.origin + window.location.pathname);
 
   $(document).on('submit', '#subscribe', function (e) {
     e.preventDefault();
