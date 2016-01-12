@@ -24,7 +24,9 @@
     return;
   }
 
-  $(document).on('submit', '#subscribe', function () {
+  $(document).on('submit', '#subscribe', function (e) {
+    e.preventDefault();
+
     var site = $('#site_id').val();
 
     $.ajax({
