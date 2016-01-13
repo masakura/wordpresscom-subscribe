@@ -27,6 +27,7 @@ WordPress.com の記事の最新 20 件を購読するアプリ。
 $ git clone git@github.com:masakura/wordpresscom-subscribe.git
 $ cd wordpresscom-subscribe
 $ npm install
+$ bower install
 ```
 
 アプリをローカルで実行するには以下を実行してください。
