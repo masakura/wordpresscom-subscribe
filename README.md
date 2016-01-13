@@ -1,4 +1,4 @@
-g# WordPress.com Subscriber
+# WordPress.com Subscriber
 WordPress.com の記事の最新 20 件を購読するアプリ。
 
 
@@ -15,6 +15,25 @@ WordPress.com の記事の最新 20 件を購読するアプリ。
 * 購読するドメインを記憶していません
 * どの記事がどのドメインのものかが分かりません
 * あくまでサンプルです...
+
+
+## 開発
+* 要 Node.js v4.2 以降
+* 要 npm v3 以降
+
+初回のみ以下を実行してください。
+
+```
+$ git clone git@github.com:masakura/wordpresscom-subscribe.git
+$ cd wordpresscom-subscribe
+$ npm install
+```
+
+アプリをローカルで実行するには以下を実行してください。
+
+```
+$ npm start
+```
 
 
 ## 学習すること
