@@ -94,7 +94,7 @@
           // 表示に適した形式に変換する
           var item = {
             title: post.title,
-            date: post.date,
+            date: moment(post.date).format('YYYY.MM.DD'),
             url: post.URL
           };
           // 画像は 200px 幅を表示
