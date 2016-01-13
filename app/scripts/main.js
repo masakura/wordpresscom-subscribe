@@ -90,7 +90,22 @@
         // 投稿データをひとつずつ、リストに変換していきます
         var $posts = posts.map(function (post) {
           // 投稿一つのタイトルを li 要素にします
-          return $(template());
+
+          // 表示に適した形式に変換する
+          var item = {
+            title: post.title,
+            date: post.date,
+            url: post.URL
+          };
+          // 画像は 200px 幅を表示
+          // 画像がない場合は代わりの画像を表示
+          if (post.featured_image) {
+            item.thumbnail = post.featured_image + '?=200';
+          } else {
+            item.thumbnail = 'http://placehold.it/200x150/27709b/ffffff';
+          }
+
+          return $(template(item));
         });
 
         // <ul id="#posts"> を空にして、投稿データを追加しなおします

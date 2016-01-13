@@ -36,6 +36,9 @@
         2,
         "single"
       ]
+    },
+    "globals": {
+      "_": false
     }
   }
 }

@@ -44,10 +44,12 @@
 
     <script id="post-template" type="text/template">
       <li class="list-group-item col-md-4">
-        <a href="#">
-          <div class="postimg"><img src="http://placehold.it/200x150/27709b/ffffff" alt="タイトルタイトルタイトルタイトルタイトル"></div>
-          <p class="postitle"><span class="postdate">2016.00.00</span>タイトルタ
-イトルタイトルタイトルタイトル</p>
+        <a href="<%- url %>" target="_blank">
+          <div class="postimg"><img src="<%- thumbnail %>" alt="<%- title %>"></div>
+          <p class="postitle">
+            <span class="postdate"><%- date %></span>
+            <%- title %>
+          </p>
           <div class="postbtn">続きを読む</div>
         </a>
       </li>
