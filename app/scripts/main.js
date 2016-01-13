@@ -69,6 +69,9 @@
     // 入力されたサイトを取得する
     var site = $('#site_id').val();
 
+    // 投稿一つを表示するテンプレートを作成
+    var template = _.template($('#post-template').html());
+
     // WordPress.com API を呼び出して投稿一覧を取得する
     $.ajax({
       url: 'https://public-api.wordpress.com/rest/v1/sites/' + site + '/posts/',
@@ -87,8 +90,7 @@
         // 投稿データをひとつずつ、リストに変換していきます
         var $posts = posts.map(function (post) {
           // 投稿一つのタイトルを li 要素にします
-          return $('<li class="list-group-item">')
-            .text(post.title);
+          return $(template());
         });
 
         // <ul id="#posts"> を空にして、投稿データを追加しなおします

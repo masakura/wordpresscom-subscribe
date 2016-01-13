@@ -11,7 +11,7 @@
 
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css' />
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -42,9 +42,21 @@
       <ul id="posts" class="list-group"></ul>
     </div>
 
+    <script id="post-template" type="text/template">
+      <li class="list-group-item col-md-4">
+        <a href="#">
+          <div class="postimg"><img src="http://placehold.it/200x150/27709b/ffffff" alt="タイトルタイトルタイトルタイトルタイトル"></div>
+          <p class="postitle"><span class="postdate">2016.00.00</span>タイトルタ
+イトルタイトルタイトルタイトル</p>
+          <div class="postbtn">続きを読む</div>
+        </a>
+      </li>
+    </script>
+
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/underscore/underscore.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
