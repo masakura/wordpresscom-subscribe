@@ -24,28 +24,31 @@
   // のように URL にアクセストークンが埋め込まれている
   // この URL の # 以降の部分を分解して、以下のような形に変換している
   // {
-  //   '#access_token': '...',
+  //   'access_token': '...',
   //   'token_type': 'bear',
   //   ...
   // }
   var params = {};
   // # 以降を & で分割
-  window.location.hash.split('&')
-    .forEach(function (p) {
-      // p に #access_token=... などが入っている
+  var hash = window.location.hash;
+  if (hash) {
+    hash.substring(1).split('&')
+      .forEach(function (p) {
+        // p に access_token=... などが入っている
 
-      // #access_token と ... に分割する
-      var pair = p.split('=', 2);
+        // access_token と ... に分割する
+        var pair = p.split('=', 2);
 
-      // 値の部分 ... を URI デコードする
-      // %40 -> @ のように変換する
-      params[pair[0]] = decodeURIComponent(pair[1]);
-    });
+        // 値の部分 ... を URI デコードする
+        // %40 -> @ のように変換する
+        params[pair[0]] = decodeURIComponent(pair[1]);
+      });
+  }
 
   // アクセストークンが取得できていない場合は
   // WordPress.com から認証とアクセス許可をもらっていないので
   // WordPress.com の OAuth2 サイトにリダイレクトし、認証とアクセス許可を求める
-  if (!params['#access_token']) {
+  if (!params['access_token']) {
     // ログインを促すダイアログを表示する
     $('#login-modal').modal('show');
 
@@ -84,7 +87,7 @@
       type: 'GET',
       beforeSend: function (xhr) {
         // 呼び出しの際、認証情報を付与する
-        xhr.setRequestHeader('Authorization', 'BEARER ' + params['#access_token']);
+        xhr.setRequestHeader('Authorization', 'BEARER ' + params['access_token']);
       }
     })
       .then(function (data) {
