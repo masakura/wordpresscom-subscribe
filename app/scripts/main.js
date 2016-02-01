@@ -18,6 +18,7 @@
     clientId = 44085;
   }
 
+
   // アクセストークンを取得
   // OAuth2 で認証とアクセス許可の取得が終わったら、戻ってくる
   // その際、http://localhost:9000/#access_token=...&token_type=bear...
@@ -28,8 +29,8 @@
   //   'token_type': 'bear',
   //   ...
   // }
-  var params = {};
   // # 以降を & で分割
+  var params = {};
   var hash = window.location.hash;
   if (hash) {
     hash.substring(1).split('&')
@@ -43,6 +44,11 @@
         // %40 -> @ のように変換する
         params[pair[0]] = decodeURIComponent(pair[1]);
       });
+  }
+
+  // ローカルストレージからアクセストークンを復元
+  if (!params['access_token']) {
+    params['access_token'] = window.sessionStorage.getItem('access_token');
   }
 
   // ダイアログのログインボタンがクリックされたら WordPress.com でログインさせる
@@ -65,25 +71,26 @@
     return;
   }
 
+  // アクセストークンを記録
+  window.sessionStorage.setItem('access_token', params['access_token']);
+
   // アクセストークンが URL に含まれていてあまりよくないので
   // URL からアクセストークンなどを消す
   window.history.replaceState(null, null, window.location.origin + window.location.pathname);
 
-  // 投稿フォームが投稿されたら...
-  $(document).on('submit', '#subscribe', function (e) {
-    // 標準のフォームの投稿機能をキャンセルする
-    // これを行わないと、サーバーに再度アクセスしてしまう
-    e.preventDefault();
+  // 一ページ目を表示
+  var page = 1;
 
-    // 入力されたサイトを取得する
-    var site = $('#site_id').val();
+  function load(site) {
+    // ロード中は次へボタンを隠す
+    $('#next').hide();
 
     // 投稿一つを表示するテンプレートを作成
     var template = _.template($('#post-template').html());
 
     // WordPress.com API を呼び出して投稿一覧を取得する
     $.ajax({
-      url: 'https://public-api.wordpress.com/rest/v1/sites/' + site + '/posts/',
+      url: 'https://public-api.wordpress.com/rest/v1/sites/' + site + '/posts/?page=' + page,
       type: 'GET',
       beforeSend: function (xhr) {
         // 呼び出しの際、認証情報を付与する
@@ -117,12 +124,42 @@
           return $(template(item));
         });
 
-        // <ul id="#posts"> を空にして、投稿データを追加しなおします
-        $('#posts').empty().append($posts);
+        // 一ページ目の時は <ul id="#posts"> を空にする
+        if (page === 1) {
+          $('#posts').empty();
+        }
+
+        //  投稿データを追加する
+        $('#posts').append($posts);
+
+        // 次のページがありそうなときは次へボタンを表示させる
+        if (data.found > 0) {
+          page++;
+          $('#next').show();
+        }
       })
       .fail(function (error) {
         // エラーの場合
         console.log(error);
       });
+  }
+
+  // 投稿フォームが投稿されたら...
+  $(document).on('submit', '#subscribe', function (e) {
+    // 標準のフォームの投稿機能をキャンセルする
+    // これを行わないと、サーバーに再度アクセスしてしまう
+    e.preventDefault();
+
+    // 入力されたサイトを取得する
+    var site = $('#site_id').val();
+
+    load(site);
+  });
+
+  // 次へボタンがクリックされたら...
+  $(document).on('click', '#next', function (e) {
+    var site = $('#site_id').val();
+
+    load(site);
   });
 })();
