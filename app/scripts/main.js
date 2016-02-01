@@ -45,21 +45,21 @@
       });
   }
 
+  // ダイアログのログインボタンがクリックされたら WordPress.com でログインさせる
+  $(document).on('click', '#login', function () {
+    // 現在の URL をリダイレクト先に設定する
+    // http://localhost:9000 とか
+    var redirect = window.location.origin + window.location.pathname;
+    var location = 'https://public-api.wordpress.com/oauth2/authorize?client_id=' + clientId + '&redirect_uri=' + redirect + '&response_type=token';
+    window.location = location;
+  });
+
   // アクセストークンが取得できていない場合は
   // WordPress.com から認証とアクセス許可をもらっていないので
   // WordPress.com の OAuth2 サイトにリダイレクトし、認証とアクセス許可を求める
   if (!params['access_token']) {
     // ログインを促すダイアログを表示する
     $('#login-modal').modal('show');
-
-    // ダイアログのログインボタンがクリックされたら WordPress.com でログインさせる
-    $(document).on('click', '#login', function () {
-    // 現在の URL をリダイレクト先に設定する
-    // http://localhost:9000 とか
-      var redirect = window.location.origin + window.location.pathname;
-      var location = 'https://public-api.wordpress.com/oauth2/authorize?client_id=' + clientId + '&redirect_uri=' + redirect + '&response_type=token';
-      window.location = location;
-    });
 
     // これ以上はすることがないので終了する
     return;
