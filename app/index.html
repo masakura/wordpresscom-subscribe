@@ -46,6 +46,23 @@
       <ul id="posts" class="list-group"></ul>
     </div>
 
+    <div id="login-modal" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">ログイン</h4>
+          </div>
+          <div class="modal-body">
+            <p>WordPress.com OAuth2 認証を利用してログインします。</p>
+            <p>ログインするボタンをクリックすると WordPress.com サイトに移動します。移動先でログインし、Approve ボタンを押してください。</p>
+          </div>
+          <div class="modal-footer">
+            <button id="login" type="button" class="btn btn-primary">WordPress.com でログインする</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script id="post-template" type="text/template">
       <li class="list-group-item col-md-4">
         <a href="<%- url %>" target="_blank">
