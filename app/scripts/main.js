@@ -111,7 +111,7 @@
           if (post.featured_image) {
             item.thumbnail = post.featured_image + '?=200';
           } else {
-            item.thumbnail = 'http://placehold.it/200x150/27709b/ffffff';
+            item.thumbnail = 'http://placehold.it/200x150/27709b/ffffff?text=No Photo';
           }
 
           return $(template(item));
