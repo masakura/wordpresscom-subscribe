@@ -94,7 +94,7 @@ ul.row {
   margin: 0 auto;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 530px) {
   .post-group-item .postimg {
     width: 200px;
   }

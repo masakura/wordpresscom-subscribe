@@ -57,7 +57,7 @@
   // アクセストークンが取得できていない場合は
   // WordPress.com から認証とアクセス許可をもらっていないので
   // WordPress.com の OAuth2 サイトにリダイレクトし、認証とアクセス許可を求める
-  if (!params['access_token']) {
+  if (!params['access_token']) { // eslint-disable-line dot-notation
     // ログインを促すダイアログを表示する
     $('#login-modal').modal('show');
 
@@ -87,7 +87,7 @@
       type: 'GET',
       beforeSend: function (xhr) {
         // 呼び出しの際、認証情報を付与する
-        xhr.setRequestHeader('Authorization', 'BEARER ' + params['access_token']);
+        xhr.setRequestHeader('Authorization', 'BEARER ' + params['access_token']); // eslint-disable-line dot-notation
       }
     })
       .then(function (data) {
