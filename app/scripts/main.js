@@ -88,6 +88,10 @@
     })
       .then(function (data) {
         console.log(data);
+
+        // 呼び出しの結果から、投稿の一覧を取得します
+        var posts = data.posts;
+        console.log(posts);
       })
       .fail(function (error) {
         console.log(error);
