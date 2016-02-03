@@ -118,7 +118,7 @@
           // html を返します
           return $html;
         });
-
+        console.log($posts);
       })
       .fail(function (error) {
         console.log(error);
