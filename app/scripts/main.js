@@ -76,5 +76,21 @@
 
     // サイトが取得されているかどうかをデバッグする
     console.log('site => ' + site);
+
+    // WordPress.com API を呼び出して投稿一覧を取得する
+    $.ajax({
+      url: 'https://public-api.wordpress.com/rest/v1/sites/' + site + '/posts/',
+      type: 'GET',
+      beforeSend: function (xhr) {
+        // 呼び出しの際、認証情報を付与する
+        xhr.setRequestHeader('Authorization', 'BEARER ' + params['access_token']); // eslint-disable-line dot-notation
+      }
+    })
+      .then(function (data) {
+        console.log(data);
+      })
+      .fail(function (error) {
+        console.log(error);
+      });
   });
 })();
