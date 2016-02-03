@@ -27,6 +27,33 @@
     window.location = location;
   });
 
+  // アクセストークンを取得
+  // OAuth2 で認証とアクセス許可の取得が終わったら、戻ってくる
+  // その際、http://localhost:9000/#access_token=...&token_type=bear...
+  // のように URL にアクセストークンが埋め込まれている
+  // この URL の # 以降の部分を分解して、以下のような形に変換している
+  // {
+  //   'access_token': '...',
+  //   'token_type': 'bear',
+  //   ...
+  // }
+  // # 以降を & で分割
+  var hash = window.location.hash;
+  if (hash) {
+    hash.substring(1).split('&')
+      .forEach(function (p) {
+        // p に access_token=... などが入っている
+
+        // access_token と ... に分割する
+        var pair = p.split('=', 2);
+
+        // 値の部分 ... を URI デコードする
+        // %40 -> @ のように変換する
+        params[pair[0]] = decodeURIComponent(pair[1]);
+      });
+  }
+  console.log(params);
+
   // アクセストークンがまだないときはログインボタンを持っているダイアログを表示します
   if (!params['access_token']) { // eslint-disable-line dot-notation
     $(document).ready(function () {
