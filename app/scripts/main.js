@@ -114,7 +114,11 @@
           var template = _.template($('#post-template').html());
           var $html = $(template(item));
           console.log($html);
+
+          // html を返します
+          return $html;
         });
+
       })
       .fail(function (error) {
         console.log(error);
