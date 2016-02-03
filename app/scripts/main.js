@@ -60,4 +60,8 @@
       $('#login-modal').modal('show');
     });
   }
+
+  // アクセストークンが URL に含まれていてあまりよくないので
+  // URL からアクセストークンなどを消す
+  window.history.replaceState(null, null, window.location.origin + window.location.pathname);
 })();
