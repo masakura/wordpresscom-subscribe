@@ -96,6 +96,19 @@
         // 投稿データをひとつずつ、リストに変換していきます
         var $posts = posts.map(function (post) {
           console.log(post);
+
+          // 表示に適した形式に変換する
+          var item = {
+            title: post.title,
+            date: moment(post.date).format('YYYY.MM.DD'),
+            url: post.URL,
+            thumbnail: post.featured_image
+          };
+          // 画像がない場合は代わりの画像を表示
+          if (!item.thumbnail) {
+            item.thumbnail = 'http://placehold.it/200x150/27709b/ffffff?text=No Photo';
+          }
+          console.log(item);
         });
       })
       .fail(function (error) {
