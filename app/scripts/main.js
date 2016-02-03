@@ -119,6 +119,9 @@
           return $html;
         });
         console.log($posts);
+
+        // <ul id="#posts"> を空にして、投稿データを追加しなおします
+        $('#posts').empty().append($posts);
       })
       .fail(function (error) {
         console.log(error);
