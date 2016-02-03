@@ -26,9 +26,9 @@ body{
   flex-wrap: wrap;
 }
 
-ul.post-group {
-  margin: 0;
-  padding: 0;
+ul.row {
+  margin-bottom: 0;
+  padding-left: 0;
 }
 
 .post-group-item {
