@@ -64,4 +64,17 @@
   // アクセストークンが URL に含まれていてあまりよくないので
   // URL からアクセストークンなどを消す
   window.history.replaceState(null, null, window.location.origin + window.location.pathname);
+
+    // 投稿フォームが投稿されたら...
+  $(document).on('submit', '#subscribe', function (e) {
+    // 標準のフォームの投稿機能をキャンセルする
+    // これを行わないと、サーバーに再度アクセスしてしまう
+    e.preventDefault();
+
+    // 入力されたサイトを取得する
+    var site = $('#site_id').val();
+
+    // サイトが取得されているかどうかをデバッグする
+    console.log('site => ' + site);
+  });
 })();
