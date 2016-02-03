@@ -43,7 +43,7 @@
 
       <ul id="sites" class="list-group"></ul>
 
-      <ul id="posts" class="list-group"></ul>
+      <ul id="posts" class="post-group"></ul>
     </div>
 
     <div id="login-modal" class="modal fade" tabindex="-1" role="dialog">
@@ -64,9 +64,9 @@
     </div>
 
     <script id="post-template" type="text/template">
-      <li class="list-group-item col-md-4">
+      <li class="post-group-item col-sm-12 col-md-4">
         <a href="<%- url %>" target="_blank">
-          <div class="postimg"><img src="<%- thumbnail %>" alt="<%- title %>"></div>
+          <div class="postimg"><img class="img-responsive" src="<%- thumbnail %>" alt="<%- title %>"></div>
           <p class="postitle">
             <span class="postdate"><%- date %></span>
             <%- title %>
