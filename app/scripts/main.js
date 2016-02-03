@@ -109,6 +109,11 @@
             item.thumbnail = 'http://placehold.it/200x150/27709b/ffffff?text=No Photo';
           }
           console.log(item);
+
+          // テンプレートを取得して、html に変換します
+          var template = _.template($('#post-template').html());
+          var $html = $(template(item));
+          console.log($html);
         });
       })
       .fail(function (error) {
