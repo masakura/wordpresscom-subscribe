@@ -92,6 +92,11 @@
         // 呼び出しの結果から、投稿の一覧を取得します
         var posts = data.posts;
         console.log(posts);
+
+        // 投稿データをひとつずつ、リストに変換していきます
+        var $posts = posts.map(function (post) {
+          console.log(post);
+        });
       })
       .fail(function (error) {
         console.log(error);
