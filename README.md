@@ -1,6 +1,7 @@
 # WordPress.com Subscriber
 WordPress.com の記事の最新 20 件を購読するアプリ。
 
+教材を [Plunk](https://plnkr.co/edit/cbsmCG?p=info) で作りました! フォークして遊んでみてください! [ハンズオンのマニュアルは GitHub にもあります。](HANDSON.md)
 
 ## 操作方法
 事前に WordPress.com アカウントを取得してください。
