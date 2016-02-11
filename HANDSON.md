@@ -6,6 +6,14 @@
 本ハンズオンを円滑に行うために以下のことにご注意ください。
 
 
+### 準備はできていますか?
+* パソコンはインターネットにつながっていますか?
+* [Google Chrome](https://www.google.co.jp/chrome/browser/) がインストールされていますか?
+* [GitHub](https://github.com/) アカウントは作成済みですか?
+* [WordPress.com](https://wordpress.com/) アカウントは作成済みですか?
+  - ブログを開設して投稿がいくつかありますか?
+
+
 ### うまく行かないときは手を挙げてお知らせください!
 講師の側からは、うまく進んでいるのかどうかが分かりません。うまく行かない時は手を挙げてお知らせください!
 
@@ -65,8 +73,6 @@
 * 脆弱性を生む可能性があるコードが含まれています
 
 
-
-
 ## 今回使用するライブラリ
 今回のハンズオンでは、CSS/JavaScript のフレームワークやライブラリを使用しています。
 
@@ -82,46 +88,49 @@
 [https://developer.wordpress.com/docs/api/console/](WordPress.com Developer Console) で、REST API の呼び出しの練習
 
 
-## 手順
-### 前準備
-画面だけの処理がないアプリを実行するところまで
-
-```
-$ git clone https://github.com/masakura/wordpresscom-subscribe.git
-$ cd wordpresscom-subscribe
-$ git checkout a419046ff71825d1f42e45d63166c880f08a2a59
-$ npm install
-$ bower install
-$ gulp serve
-```
-
-* Bootstrap が組み込み済みです
-* 画面 (HTML や CSS) は最初で用意されています
-* 基本的に、WordPress.com にアプリの登録をして JavaScript を書くだけです
-* 今回書く対象は `app/scripts/main.js` です
-
-`app/scripts/main.js` はこんな感じになってます
-
-```javascript
-(function () {
-  'use strict';
-
-})();
-```
+## ハンズオン
 
 
-### WordPress.com でアプリを登録する
-1. https://developer.wordpress.com/apps/new/ にアクセス
+### 準備
+#### 雛形 Plunk のフォーク
+今回のハンズオン用に教材の雛形を用意してありますので、そちらをフォークして使います。
+
+1. [Plunker](https://plnkr.co/) にアクセスし、右上の `Sign in with Github` ボタンをクリックします
+  * GitHub でログインします
+  * `Authorize application` で Plunker に許可を与えます
+2. [教材の雛形 plunk](https://plnkr.co/edit/cbsmCG?p=info) にアクセスします
+3. `Fork` ボタンをクリックしてフォークします
+4. 右上の自分のアカウントのボタンから `My plunks` をクリックします
+5. フォークした Plunk の上にマウスカーソルを合わせて `View this Plunk an overlay  (再生ボタン)` をクリックします
+6. `Fullscreen` ボタンをクリックします
+  * 新しく開いたウインドウはそのままにしてください!
+  * この URL がアプリの URL になりますのでメモしてください!
+7. `Edit` ボタンをクリックします
+8. `index.html` ファイル内の 22 行目の `My Postlist` を適当に書き換えて、`Save` ボタンをクリックします
+9. 6 のウインドウでリロードボタンをクリックし、内容が反映されていることを確認してください
+
+Plunker はプレビュー機能があり、変更をその場で確認することができますが、今回は OAuth2 のからみでちょっと手順が複雑になっています。ごめんなさい...
+
+
+#### WordPress.com アプリの登録
+アプリを作る前に WordPress.com REST API を使うためのアプリの登録が必要となります。
+
+1. [Create an application](https://developer.wordpress.com/apps/new/) にアクセス
 2. Name/Description は適当に入力
 3. Website URL/Redirect URL/Javascript Origins にはアプリの URL を追加する
-  - `http://localhost:9000`
+  * `https://run.plnkr.co/plunks/xxxxxx/`
 4. Whats is ...? に答えを入れる
 5. Type は `Web` を選択
 6. `Create` ボタンをクリック
 7. `Client ID` などが表示される
+  * `Client ID` は後で使いますのでメモをしてください!
 
 
-### 認証し、アクセストークンをもらうところまで
+### ハンズオン
+準備が完了しましたのでハンズオンを進めていきます。
+
+
+#### 認証し、アクセストークンをもらうところまで
 WordPress.com の機能を呼び出すまでの流れはこんな感じ。
 
 1. アプリサイトにアクセスする
@@ -134,7 +143,7 @@ WordPress.com の機能を呼び出すまでの流れはこんな感じ。
 手順はこんな感じ。
 
 1. JavaScript をコピペします
-2. 13 行目の `ここにかいてください` を消して、Client ID を書きます
+2. 13 行目の `ここに書いてださい` を消して、Client ID を書きます
   - `var client Id = 000000;` のような感じ
 3. 勝手に動き始めて WordPress.com へ飛ばされます
   - ログインし、`Approve` ボタンをクリックしてください
@@ -182,7 +191,7 @@ https://github.com/masakura/wordpresscom-subscribe/commit/aa09d757fa902019812385
 ```
 
 
-### アクセストークンを URL から取得する
+#### アクセストークンを URL から取得する
 URL を分解してアクセストークンを取得します。
 
 1. 28 行目の直後に以下のコードを挿入してください
@@ -221,7 +230,7 @@ https://github.com/masakura/wordpresscom-subscribe/commit/46d26459818fb337735c0d
 ```
 
 
-### アクセストークンを URL から除去する
+#### アクセストークンを URL から除去する
 このままだとアクセストークンが表示されっぱなしになるので、消します
 
 1. 62 行目の直後に以下のコードを追加します
@@ -235,7 +244,7 @@ https://github.com/masakura/wordpresscom-subscribe/commit/b56510bf5d32b0bb0fe45e
 ```
 
 
-### 入力されたサイトを取得する
+#### 入力されたサイトを取得する
 プログラムを組むときの鉄則はちょっとずつです。一気に作りたいところですが、ぐっとこらえて、テキストボックスに入力されたサイトが正しいかをまずは確認します。
 
 1. 66 行目の直後に以下のコードを追加します
@@ -262,7 +271,7 @@ https://github.com/masakura/wordpresscom-subscribe/commit/ddc146571ebbaa8d2353f3
 ```
 
 
-### WordPress.com 投稿を取得する
+#### WordPress.com 投稿を取得する
 ここが一番の山場です!
 
 WordPress.com REST API を利用して、投稿を取得します。jQuery の `$.ajax` 関数で呼び出せますが、アクセストークンを渡してやらなければいけません。
@@ -298,7 +307,7 @@ https://github.com/masakura/wordpresscom-subscribe/commit/b320edf930852ceb771d24
 ```
 
 
-### 結果から投稿のみを取り出す
+#### 結果から投稿のみを取り出す
 WordPress REST API の呼び出し結果はこんな感じになってます。
 
 ```javascript
@@ -353,7 +362,7 @@ https://github.com/masakura/wordpresscom-subscribe/commit/91119fb54364bf0cfb3d09
 ```
 
 
-### 投稿をひとつずつ処理する
+#### 投稿をひとつずつ処理する
 投稿をひとつずつ、画面に表示できるように変換していきます。ですが、一気にやると大変なので、まずは投稿をひとつずつ表示してみましょう。
 
 1. 94 行目の直後に以下のコードを追加します
@@ -385,7 +394,7 @@ https://github.com/masakura/wordpresscom-subscribe/commit/22bfa7bcae70e4789db276
 ```
 
 
-### 投稿を表示しやすいように加工する
+#### 投稿を表示しやすいように加工する
 投稿をそのまま表示しようとすると、面倒な問題がおきます。
 
 * 日付が `2016/02/13T12:34:45` と表示されたり...
@@ -428,7 +437,7 @@ https://github.com/masakura/wordpresscom-subscribe/commit/dd6853c9064af5b0523cbb
 ```
 
 
-### 投稿一つを HTML に変換します
+#### 投稿一つを HTML に変換します
 画面に表示するためには HTML に変換しなければなりません。変換をするときは、テンプレートエンジンを使うと良いです。今回は Underscore.js のテンプレートエンジンを使っています。
 
 `app/index.html` 内の 64 行目当たりがテンプレートです。`<%- url %>` と書かれているところが `url` と置き換えられます。
@@ -463,7 +472,7 @@ https://github.com/masakura/wordpresscom-subscribe/commit/337b0e4c5e48a8e78f803c
           console.log($html);
 ```
 
-#### 脆弱性について
+##### 脆弱性について
 * `<%= %>` を使うとかなり危ないです
   - 第三者が書いた JavaScript が動作してしまいます
 * `<%- %>` でも今回のように `<a href="<%- url %>">` などで使うと危ないです
@@ -471,7 +480,7 @@ https://github.com/masakura/wordpresscom-subscribe/commit/337b0e4c5e48a8e78f803c
 * 今回はハンズオンなのできちんとした対処はしてませんが、アプリをきちんと作るときは注意してください
 
 
-### HTML を返すようにする
+#### HTML を返すようにする
 投稿を HTML に変換しましたので、それを返します。
 
 1. 116 行目の直後に以下のコードを追加します
@@ -487,7 +496,7 @@ https://github.com/masakura/wordpresscom-subscribe/commit/c1660b56eb94caab109348
           return $html;
 ```
 
-### すべての投稿の HTML を取得できたか確認する
+#### すべての投稿の HTML を取得できたか確認する
 ここまでで、すべての投稿を HTML に変換できたはずなので、それを確認します。
 
 1. 120 行目の直後に以下のコードを追加します
@@ -502,7 +511,7 @@ https://github.com/masakura/wordpresscom-subscribe/commit/5427bba31e1ad7784851e8
 ```
 
 
-### すべての投稿の HTML を表示します
+#### すべての投稿の HTML を表示します
 ここまでで、投稿を表示する準備は整いました。あとは、画面に表示できるよう、追加するだけです!
 
 1. 121 行目の直後に以下のコードを追加します
