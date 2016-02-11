@@ -253,7 +253,8 @@ URL を分解してアクセストークンを取得します。
 ```javascript
 
   // アクセストークンが URL に含まれていてあまりよくないので
-  // URL からアクセストークンなどを消す  window.history.replaceState(null, null, window.location.origin + window.location.pathname);
+  // URL からアクセストークンなどを消す  
+  window.history.replaceState(null, null, window.location.origin + window.location.pathname);
 ```
 
 
@@ -470,8 +471,8 @@ WordPress REST API の呼び出し結果はこんな感じになってます。
     </script>
 ```
 
-1. 11 行目の直後に以下のコードを追加します
-2. WordPress.com にリダイレクトされるので、`Approve` ボタンをくりくします
+1. 111 行目の直後に以下のコードを追加します
+2. WordPress.com にリダイレクトされるので、`Approve` ボタンをクリックします
 3. テキストボックスにサイトを入力し、`購読`ボタンをクリックします
 4. HTML はコンソールに出力されます (実際は jQuery Object)
 
