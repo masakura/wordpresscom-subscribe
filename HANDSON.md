@@ -253,7 +253,8 @@ URL を分解してアクセストークンを取得します。
 ```javascript
 
   // アクセストークンが URL に含まれていてあまりよくないので
-  // URL からアクセストークンなどを消す  window.history.replaceState(null, null, window.location.origin + window.location.pathname);
+  // URL からアクセストークンなどを消す  
+  window.history.replaceState(null, null, window.location.origin + window.location.pathname);
 ```
 
 
