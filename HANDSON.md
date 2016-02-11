@@ -1,5 +1,9 @@
 # ハンズオン (案)
-* 本番は Plunker を使います
+## ハンズオンの目的
+* OAuth2 認証の仕組みを覚える
+* RESTful API を呼び出したアプリの作り方を覚える
+
+本ハンズオンでは、WordPress.com REST API を利用して、投稿の一覧を取得するだけの簡単なアプリを作ります。
 
 
 ## 本ハンズオンを行うにあたっての注意
@@ -84,8 +88,14 @@
 | [Moment.js](http://momentjs.com/) | 今回は投稿の日時を好みの形に表示するために利用しています。
 
 
-## 事前にやること
-[https://developer.wordpress.com/docs/api/console/](WordPress.com Developer Console) で、REST API の呼び出しの練習
+#### REST API の練習
+WordPress.com REST API は [WordPress.com Developer Console](https://developer.wordpress.com/docs/api/console/) というものが用意されていて、簡単に REST API を実行し結果を見ることができます。
+
+まずはこれで REST API 呼び出しの雰囲気を確かめましょう!
+
+1. `posts` にある `GET /v1.1/sites/$site/posts/` を探し、クリックします
+2. `$site` のところに、作成した WordPress.com ブログのドメイン名を入力してください (Ex: `masakura.wordpress.com`)
+3. 右上の実行ボタンをクリックすると結果が取得できます
 
 
 ## ハンズオン
@@ -138,18 +148,20 @@ WordPress.com の機能を呼び出すまでの流れはこんな感じ。
 3. WordPress.com のサイトでログインをする
 4. WordPress.com のサイトで API を利用する認可をもらう
 5. アプリサイトに転送される
-- この時、アクセストークンが URL に追加される
+  - この時、アクセストークンが URL に追加される
 
 手順はこんな感じ。
 
 1. JavaScript をコピペします
-2. 13 行目の `ここに書いてださい` を消して、Client ID を書きます
+2. 13 行目の `ここに書いてださい` を消して、Client ID を書いて、保存します
   - `var client Id = 000000;` のような感じ
-3. 勝手に動き始めて WordPress.com へ飛ばされます
+3. アプリをリロードすると、ダイアログが表示されますので `WordPress.com でログインする`をクリックします
+  - 以後、保存するやリロードする手順は省略します
+4. 動き始めて WordPress.com へ飛ばされます
   - ログインし、`Approve` ボタンをクリックしてください
-4. 戻ってくるので、URL にアクセストークンが含まれていることを確認します
+5. 戻ってくるので、URL にアクセストークンが含まれていることを確認します
 
-https://github.com/masakura/wordpresscom-subscribe/commit/aa09d757fa902019812385cf5dcc03bdb245b124
+[差分](https://github.com/masakura/wordpresscom-subscribe/commit/aa09d757fa902019812385cf5dcc03bdb245b124)
 
 ```javascript
 (function () {
@@ -197,7 +209,7 @@ URL を分解してアクセストークンを取得します。
 1. 28 行目の直後に以下のコードを挿入してください
 2. 開発者ツールのコンソールにアクセストークンが表示されていることを確認します
 
-https://github.com/masakura/wordpresscom-subscribe/commit/46d26459818fb337735c0dcb64dd31201398cdc7
+[差分](https://github.com/masakura/wordpresscom-subscribe/commit/46d26459818fb337735c0dcb64dd31201398cdc7)
 
 ```javascript
 
@@ -236,11 +248,12 @@ https://github.com/masakura/wordpresscom-subscribe/commit/46d26459818fb337735c0d
 1. 62 行目の直後に以下のコードを追加します
 2. URL を確認したら、アクセストークンが消えています
 
-https://github.com/masakura/wordpresscom-subscribe/commit/b56510bf5d32b0bb0fe45ebbd37c8d1b61b717dc
+[差分](https://github.com/masakura/wordpresscom-subscribe/commit/b56510bf5d32b0bb0fe45ebbd37c8d1b61b717dc)
 
 ```javascript
 
-  window.history.replaceState(null, null, window.location.origin + window.location.pathname);
+  // アクセストークンが URL に含まれていてあまりよくないので
+  // URL からアクセストークンなどを消す  window.history.replaceState(null, null, window.location.origin + window.location.pathname);
 ```
 
 
@@ -252,7 +265,7 @@ https://github.com/masakura/wordpresscom-subscribe/commit/b56510bf5d32b0bb0fe45e
 3. テキストボックスにサイト名 (自分で作った WordPress.com サイト、`masakura.wordpress.com` とか) を入れ、`購読`ボタンをクリックします。
 4. コンソールにサイト名が表示されます
 
-https://github.com/masakura/wordpresscom-subscribe/commit/ddc146571ebbaa8d2353f34560b5a4bd16d22920
+[差分](https://github.com/masakura/wordpresscom-subscribe/commit/ddc146571ebbaa8d2353f34560b5a4bd16d22920)
 
 ```javascript
 
@@ -277,12 +290,12 @@ https://github.com/masakura/wordpresscom-subscribe/commit/ddc146571ebbaa8d2353f3
 WordPress.com REST API を利用して、投稿を取得します。jQuery の `$.ajax` 関数で呼び出せますが、アクセストークンを渡してやらなければいけません。
 
 1. 78 行目の直後に以下のコードを追加します
-2. WordPress.com にリダイレクトされるので、`Approve` ボタンをくりくします
+2. WordPress.com にリダイレクトされるので、`Approve` ボタンをクリックします
 3. テキストボックスにサイトを入力し、`購読`ボタンをクリックします
 4. 購読内容はコンソールに出力されます
   - エラーなどないか確認してください
 
-https://github.com/masakura/wordpresscom-subscribe/commit/b320edf930852ceb771d24363b87ec1ac274fce2
+[差分](https://github.com/masakura/wordpresscom-subscribe/commit/b320edf930852ceb771d24363b87ec1ac274fce2)
 
 ```javascript
 
@@ -335,7 +348,7 @@ WordPress REST API の呼び出し結果はこんな感じになってます。
 3. テキストボックスにサイトを入力し、`購読`ボタンをクリックします
 4. 投稿はコンソールに出力されます
 
-https://github.com/masakura/wordpresscom-subscribe/commit/91119fb54364bf0cfb3d099cda7eed536faee1fc
+[差分](https://github.com/masakura/wordpresscom-subscribe/commit/91119fb54364bf0cfb3d099cda7eed536faee1fc)
 
 ```javascript
 
@@ -370,7 +383,7 @@ https://github.com/masakura/wordpresscom-subscribe/commit/91119fb54364bf0cfb3d09
 3. テキストボックスにサイトを入力し、`購読`ボタンをクリックします
 4. 投稿がひとつずつコンソールに出力されます
 
-https://github.com/masakura/wordpresscom-subscribe/commit/22bfa7bcae70e4789db2761d34ed066353eaace5
+[差分](https://github.com/masakura/wordpresscom-subscribe/commit/22bfa7bcae70e4789db2761d34ed066353eaace5)
 
 ```javascript
 
@@ -407,7 +420,7 @@ https://github.com/masakura/wordpresscom-subscribe/commit/22bfa7bcae70e4789db276
 3. テキストボックスにサイトを入力し、`購読`ボタンをクリックします
 4. 投稿はコンソールに出力されます
 
-https://github.com/masakura/wordpresscom-subscribe/commit/dd6853c9064af5b0523cbb5dfaffc458aa04559f
+[差分](https://github.com/masakura/wordpresscom-subscribe/commit/dd6853c9064af5b0523cbb5dfaffc458aa04559f)
 
 ```javascript
 
@@ -462,7 +475,7 @@ https://github.com/masakura/wordpresscom-subscribe/commit/dd6853c9064af5b0523cbb
 3. テキストボックスにサイトを入力し、`購読`ボタンをクリックします
 4. HTML はコンソールに出力されます (実際は jQuery Object)
 
-https://github.com/masakura/wordpresscom-subscribe/commit/337b0e4c5e48a8e78f803c5f69aa9afd6644d4ac
+[差分](https://github.com/masakura/wordpresscom-subscribe/commit/337b0e4c5e48a8e78f803c5f69aa9afd6644d4ac)
 
 ```javascript
 
@@ -488,7 +501,7 @@ https://github.com/masakura/wordpresscom-subscribe/commit/337b0e4c5e48a8e78f803c
 3. テキストボックスにサイトを入力し、`購読`ボタンをクリックします
 4. 今回はなにも変わりません
 
-https://github.com/masakura/wordpresscom-subscribe/commit/c1660b56eb94caab109348c81c07cb3f85a7e350
+[差分](https://github.com/masakura/wordpresscom-subscribe/commit/c1660b56eb94caab109348c81c07cb3f85a7e350)
 
 ```javascript
 
@@ -504,7 +517,7 @@ https://github.com/masakura/wordpresscom-subscribe/commit/c1660b56eb94caab109348
 3. テキストボックスにサイトを入力し、`購読`ボタンをクリックします
 4. 投稿はコンソールに出力されます
 
-https://github.com/masakura/wordpresscom-subscribe/commit/5427bba31e1ad7784851e818e5ff7e41ca8c8fbf
+[差分](https://github.com/masakura/wordpresscom-subscribe/commit/5427bba31e1ad7784851e818e5ff7e41ca8c8fbf)
 
 ```javascript
         console.log($posts);
@@ -519,10 +532,23 @@ https://github.com/masakura/wordpresscom-subscribe/commit/5427bba31e1ad7784851e8
 3. テキストボックスにサイトを入力し、`購読`ボタンをクリックします
 4. できました!
 
-https://github.com/masakura/wordpresscom-subscribe/commit/5facf48eb2339d91f6e28ea971a7e3b68beab0f3
+[差分](https://github.com/masakura/wordpresscom-subscribe/commit/5facf48eb2339d91f6e28ea971a7e3b68beab0f3)
 
 ```javascript
 
         // <ul id="#posts"> を空にして、投稿データを追加しなおします
         $('#posts').empty().append($posts);
 ```
+
+
+## 余裕な方へ...
+これくらい余裕だという方は、ぜひ自分なりのアプリを作ってみてください!
+
+* 自由な発想でなにか作ってみましょう! ブログ投稿アプリも作れます!
+* 認証なしで投稿を表示できるようにしてみましょう!
+  - AWS Gateway + Lambda を使えばいけますが、規約違反っぽいです...
+  - RESTfull API ではありませんが、RSS 使えばいけそう?
+
+
+## まとめ
+いかがだったでしょうか? なんとなく流れはつかめたと思います。SNS 系でアプリを作る場合の基礎となりますので、理解できるまで何度か繰り返してみてください!
