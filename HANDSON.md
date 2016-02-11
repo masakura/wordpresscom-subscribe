@@ -65,6 +65,19 @@
 * 脆弱性を生む可能性があるコードが含まれています
 
 
+
+
+## 今回使用するライブラリ
+今回のハンズオンでは、CSS/JavaScript のフレームワークやライブラリを使用しています。
+
+| 名前 | 説明
+| ---- | ----
+| [jQuery](https://jquery.com/) | 使われていない事のほうが珍しいライブラリ。今回は WordPrss.com API の呼び出しや、WordPress.com 投稿の表示に利用しています。
+| [Bootstrap](http://getbootstrap.com/) | 見た目を一からデザインするのは大変時間がかかりますので、今回は Bootstrap というフレームワークを利用した上で見た目を調整しております。
+| [Underscore.js](http://underscorejs.org/) | 今回は投稿を表示する HTML を生成するためのテンプレートエンジンとして利用しています。オブジェクトや配列の操作が得意ですので、おすすめです。
+| [Moment.js](http://momentjs.com/) | 今回は投稿の日時を好みの形に表示するために利用しています。
+
+
 ## 事前にやること
 [https://developer.wordpress.com/docs/api/console/](WordPress.com Developer Console) で、REST API の呼び出しの練習
 
